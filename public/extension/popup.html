@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JobTrail AI</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        width: 100%;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: #e6e8f2;
+        background:
+          radial-gradient(500px 300px at 100% -20%, rgba(34,211,238,0.28), transparent 60%),
+          radial-gradient(500px 400px at -20% 110%, rgba(124,92,255,0.38), transparent 60%),
+          #0a0f22;
+      }
+      header {
+        padding: 14px 16px;
+        display: flex; align-items: center; gap: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .logo {
+        width: 28px; height: 28px; border-radius: 8px;
+        background: linear-gradient(135deg,#7c5cff,#22d3ee);
+        display: grid; place-items: center; color: #0a0f22; font-weight: 900;
+      }
+      main { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+      label {
+        font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #9aa3c7;
+      }
+      input {
+        width: 100%; padding: 9px 11px; border-radius: 10px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+        color: #e6e8f2; font-size: 13px; outline: none;
+      }
+      input:focus { border-color: #7c5cff; box-shadow: 0 0 0 3px rgba(124,92,255,0.28); }
+      button {
+        width: 100%; padding: 11px; border: 0; border-radius: 11px;
+        background: linear-gradient(120deg,#7c5cff,#22d3ee);
+        color: white; font-weight: 700; cursor: pointer; font-size: 13px;
+        transition: transform 0.12s ease, filter 0.12s ease;
+      }
+      button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+      button.ghost {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #e6e8f2; font-weight: 500;
+      }
+      .row { display: flex; gap: 8px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .status { font-size: 12px; color: #9aa3c7; min-height: 16px; }
+      .ok { color: #34d399; }
+      .err { color: #fb7185; }
+      a { color: #a78bfa; text-decoration: none; font-size: 12px; }
+      .pill {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 3px 8px; border-radius: 999px;
+        background: rgba(52,211,153,0.14); border: 1px solid rgba(52,211,153,0.35);
+        color: #6ee7b7; font-size: 11px;
+      }
+      .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">J</div>
+      <div style="flex:1">
+        <div style="font-weight:700">JobTrail<span style="color:#a78bfa">AI</span></div>
+        <div style="font-size:11px;color:#9aa3c7">One-click job autofill</div>
+      </div>
+      <span id="statusPill" class="pill" style="display:none">● connected</span>
+    </header>
+    <main>
+      <!-- First-time signin: paste API key only. API URL is hardcoded. -->
+      <div id="setup" style="display:none">
+        <label>API key</label>
+        <input id="apiKey" placeholder="jt_..." autocomplete="off" spellcheck="false" />
+        <div style="margin-top:10px" class="row">
+          <button id="save">Sign in</button>
+        </div>
+        <div id="msg" class="status" style="margin-top:8px"></div>
+        <div style="margin-top:6px">
+          <a id="openApp" href="#" target="_blank" rel="noopener">Get your API key →</a>
+        </div>
+      </div>
+
+      <!-- Signed-in actions. -->
+      <div id="actions" style="display:none">
+        <button id="autofill">⚡ Autofill this page</button>
+        <div class="grid">
+          <button id="scan" class="ghost">🔍 Scan fields</button>
+          <button id="dashboard" class="ghost">🗂 Dashboard</button>
+        </div>
+        <div id="log" class="status"></div>
+        <div class="divider"></div>
+        <button id="logout" class="ghost">Sign out</button>
+      </div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
