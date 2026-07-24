@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "JobTrail AI — One-click job autofill",
+  "short_name": "JobTrail AI",
+  "version": "1.0.0",
+  "description": "AI-powered autofill for LinkedIn, Greenhouse, Lever, Workday, Ashby, iCIMS, Taleo and 500+ career portals.",
+  "permissions": ["storage", "scripting", "activeTab", "cookies"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "JobTrail AI"
+  },
+  "icons": {
+    "16": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/icon.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
